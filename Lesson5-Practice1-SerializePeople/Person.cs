@@ -4,11 +4,11 @@ using System.Runtime.Serialization;
 namespace Lesson5_Practice1_SerializePeople
 {
     [Serializable]
-    class Person
+    class Person : IDeserializationCallback
     {
         public string name;
         public DateTime dateOfBirth;
-        public int age;
+        [NonSerialized] public int age;
 
         public Person(string _name, DateTime _dateOfBirth)
         {
@@ -36,6 +36,12 @@ namespace Lesson5_Practice1_SerializePeople
             {
                 age--;
             }
+        }
+
+        void IDeserializationCallback.OnDeserialization(Object sender)
+        {
+            // Calculate the age after the deserialization
+            CalculateAge();
         }
     }
 }
