@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace Lesson5_Practice1_SerializePeople
 {
+    [Serializable]
     class Person
     {
         public string name;
