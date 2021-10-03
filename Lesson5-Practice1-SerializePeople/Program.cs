@@ -16,7 +16,9 @@ namespace Lesson5_Practice1_SerializePeople
         {
             if (args.Length == 0)
             {
-                // TODO: Deserialize
+                // If they provide no arguments, display the last person
+                Person p = Deserialize();
+                Console.WriteLine(p.ToString());
             }
             else
             {
@@ -62,5 +64,23 @@ namespace Lesson5_Practice1_SerializePeople
             fs.Close();
         }
 
+        private static Person Deserialize()
+        {
+            Person dsp = new Person();
+
+            // Open file to read the data from
+            FileStream fs = new FileStream("Person.Dat", FileMode.Open);
+
+            // Create a BinaryFormatter object to perform the deserialization
+            BinaryFormatter bf = new BinaryFormatter();
+
+            // Use the BinaryFormatter object to deserialize the data to from file
+            dsp = (Person)bf.Deserialize(fs);
+
+            // Close the file
+            fs.Close();
+
+            return dsp;
+        }
     }
 }
